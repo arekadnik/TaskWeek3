@@ -1,6 +1,7 @@
 package stadnik.arkadiusz.week3.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import stadnik.arkadiusz.week3.model.Car;
@@ -23,12 +24,12 @@ public class CarApi {
         carList.add(new Car(3, "Citroen", "c4", "red"));
     }
 
-    @GetMapping
+    @GetMapping(produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<Car>> getCars() {
         return new ResponseEntity<>(carList, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Car> getCardByID(@PathVariable long id) {
         Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
@@ -37,7 +38,7 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("color/{color}")
+    @GetMapping(value = "color/{color}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Car> getCarByColor(@PathVariable String color) {
         for (Car car : carList) {
             if (car.getColor().equals(color)) {
@@ -47,7 +48,7 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
+    @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Car> addNewCar(@RequestBody Car car) {
         boolean add = carList.add(car);
         if (add) {
@@ -56,7 +57,7 @@ public class CarApi {
         return new ResponseEntity<Car>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PutMapping
+    @PutMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Car> modifyCar(@RequestBody Car newCar) {
         Optional<Car> first = carList.stream().filter(car -> car.getId() == newCar.getId()).findFirst();
         if (first.isPresent()) {
@@ -67,7 +68,7 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PatchMapping("/modify/{id}")
+    @PatchMapping(value = "/modify/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Car> changeCarParam(@RequestBody String color, @PathVariable int id) {
         Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
@@ -77,7 +78,7 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Car> removeCarByID(@PathVariable long id) {
         Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
