@@ -1,10 +1,13 @@
-package stadnik.arkadiusz.week3;
+package stadnik.arkadiusz.week3.model;
 
 public class Car {
     long id;
     String mark;
     String model;
     String color;
+
+    public Car() {
+    }
 
     public Car(long id, String mark, String model, String color) {
         this.id = id;
@@ -45,13 +48,5 @@ public class Car {
         this.color = color;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
-                ", color='" + color + '\'' +
-                '}';
-    }
+
 }

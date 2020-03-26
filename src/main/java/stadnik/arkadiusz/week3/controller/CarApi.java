@@ -1,8 +1,9 @@
-package stadnik.arkadiusz.week3;
+package stadnik.arkadiusz.week3.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import stadnik.arkadiusz.week3.model.Car;
 
 
 import java.util.ArrayList;
