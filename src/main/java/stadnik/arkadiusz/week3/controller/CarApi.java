@@ -67,12 +67,12 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PatchMapping("/modify//{id}")
-    public ResponseEntity<Car> changeCarParam(@RequestBody String modifyCarColor, @PathVariable int id) {
+    @PatchMapping("/modify/{id}")
+    public ResponseEntity<Car> changeCarParam(@RequestBody String color, @PathVariable int id) {
         Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
-            first.get().setColor(modifyCarColor);
-            return new ResponseEntity<Car>(first.get(), HttpStatus.OK);
+            first.get().setColor(color);
+            return new ResponseEntity<>(first.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
     }
