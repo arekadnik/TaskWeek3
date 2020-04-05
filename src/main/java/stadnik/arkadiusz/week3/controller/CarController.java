@@ -36,10 +36,11 @@ public class CarController {
 
     @GetMapping(value = "cars/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public String getCardByID(@PathVariable long id, Model model) {
-        Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
-        if (first.isPresent()) {
-            model.addAttribute("cars", first);
-            return "carsList";
+        for (Car c : carList) {
+            if (c.getId() == id) {
+                model.addAttribute("cars", c);
+                return "carsList";
+            }
         }
         return "emptyList";
     }
