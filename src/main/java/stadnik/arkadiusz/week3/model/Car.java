@@ -1,10 +1,10 @@
 package stadnik.arkadiusz.week3.model;
 
 public class Car {
-    long id;
-    String mark;
-    String model;
-    String color;
+    private long id;
+    private String mark;
+    private String model;
+    private String color;
 
     public Car() {
     }

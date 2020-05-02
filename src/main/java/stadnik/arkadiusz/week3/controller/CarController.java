@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//
-//@RestController
-//@RequestMapping("/cars")
+
 @Controller
 public class CarController {
 
